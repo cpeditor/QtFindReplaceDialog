@@ -6,9 +6,8 @@
 #include "findreplacedialog.h"
 #include "ui_findreplacedialog.h"
 
-FindReplaceDialog::FindReplaceDialog(QWidget *parent) :
-    QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint),
-    ui(new Ui::FindReplaceDialog)
+FindReplaceDialog::FindReplaceDialog(QWidget *parent)
+    : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint), ui(new Ui::FindReplaceDialog)
 {
     ui->setupUi(this);
 }
@@ -21,7 +20,8 @@ FindReplaceDialog::~FindReplaceDialog()
 void FindReplaceDialog::changeEvent(QEvent *e)
 {
     QDialog::changeEvent(e);
-    switch (e->type()) {
+    switch (e->type())
+    {
     case QEvent::LanguageChange:
         ui->retranslateUi(this);
         break;
@@ -30,15 +30,18 @@ void FindReplaceDialog::changeEvent(QEvent *e)
     }
 }
 
-void FindReplaceDialog::setTextEdit(QTextEdit *textEdit) {
+void FindReplaceDialog::setTextEdit(QTextEdit *textEdit)
+{
     ui->findReplaceForm->setTextEdit(textEdit);
 }
 
-void FindReplaceDialog::writeSettings(QSettings &settings, const QString &prefix) {
+void FindReplaceDialog::writeSettings(QSettings &settings, const QString &prefix)
+{
     ui->findReplaceForm->writeSettings(settings, prefix);
 }
 
-void FindReplaceDialog::readSettings(QSettings &settings, const QString &prefix) {
+void FindReplaceDialog::readSettings(QSettings &settings, const QString &prefix)
+{
     ui->findReplaceForm->readSettings(settings, prefix);
 }
 
@@ -52,10 +55,12 @@ void FindReplaceDialog::find()
     ui->findReplaceForm->find();
 }
 
-void FindReplaceDialog::findNext() {
+void FindReplaceDialog::findNext()
+{
     ui->findReplaceForm->findNext();
 }
 
-void FindReplaceDialog::findPrev() {
+void FindReplaceDialog::findPrev()
+{
     ui->findReplaceForm->findPrev();
 }
