@@ -144,6 +144,9 @@ class FINDREPLACESHARED_EXPORT FindReplaceForm : public QWidget
     /// the regexp checkbox was selected
     void regexpSelected(bool sel);
 
+    // the selection of the textedit changed
+    void onSelectionChanged();
+
   protected:
     Ui::FindReplaceForm *ui;
 
@@ -152,6 +155,9 @@ class FINDREPLACESHARED_EXPORT FindReplaceForm : public QWidget
 
     /// the text editor (possibly) associated with this form
     QTextEdit *textEdit;
+
+    // connection to textedit selection change
+    QMetaObject::Connection selectionChangeConnection;
 };
 
 #endif // FINDREPLACEFORM_H

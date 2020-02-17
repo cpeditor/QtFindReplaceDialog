@@ -23,7 +23,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Fi&amp;nd:</string>
+            <string>Find:</string>
            </property>
            <property name="buddy">
             <cstring>textToFind</cstring>
@@ -36,7 +36,7 @@
          <item row="1" column="0">
           <widget class="QLabel" name="replaceLabel">
            <property name="text">
-            <string>R&amp;eplace with:</string>
+            <string>Replace with:</string>
            </property>
            <property name="buddy">
             <cstring>textToReplace</cstring>
@@ -62,23 +62,23 @@
        <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>D&amp;irection</string>
+          <string>Direction</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QRadioButton" name="downRadioButton">
+           <widget class="QRadioButton" name="upRadioButton">
             <property name="text">
-             <string>&amp;Down</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
+             <string>Up</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="upRadioButton">
+           <widget class="QRadioButton" name="downRadioButton">
             <property name="text">
-             <string>&amp;Up</string>
+             <string>Down</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -88,20 +88,20 @@
        <item>
         <widget class="QGroupBox" name="groupBox_2">
          <property name="title">
-          <string>&amp;Options</string>
+          <string>Options</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
            <widget class="QCheckBox" name="caseCheckBox">
             <property name="text">
-             <string>Case &amp;sensitive</string>
+             <string>Case sensitive</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="wholeCheckBox">
             <property name="text">
-             <string>&amp;Whole words only</string>
+             <string>Whole words only</string>
             </property>
            </widget>
           </item>
@@ -118,7 +118,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://doc.trolltech.com/qregexp.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://doc.trolltech.com/qregexp.html&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
-             <string>Regular E&amp;xpression</string>
+             <string>Regular Expression</string>
             </property>
            </widget>
           </item>
@@ -140,14 +140,7 @@ p, li { white-space: pre-wrap; }
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>&amp;Find</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="closeButton">
-       <property name="text">
-        <string>&amp;Close</string>
+        <string>Find</string>
        </property>
       </widget>
      </item>
@@ -157,7 +150,7 @@ p, li { white-space: pre-wrap; }
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>&amp;Replace</string>
+        <string>Replace</string>
        </property>
       </widget>
      </item>
@@ -167,7 +160,7 @@ p, li { white-space: pre-wrap; }
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>Replace &amp;All</string>
+        <string>Replace All</string>
        </property>
       </widget>
      </item>
@@ -188,17 +181,6 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <tabstops>
-  <tabstop>textToFind</tabstop>
-  <tabstop>textToReplace</tabstop>
-  <tabstop>downRadioButton</tabstop>
-  <tabstop>upRadioButton</tabstop>
-  <tabstop>caseCheckBox</tabstop>
-  <tabstop>wholeCheckBox</tabstop>
-  <tabstop>regexCheckBox</tabstop>
-  <tabstop>findButton</tabstop>
-  <tabstop>closeButton</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

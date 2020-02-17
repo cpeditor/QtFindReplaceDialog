@@ -22,9 +22,13 @@
 
 #define DEBUG_FIND 0 // Set to '1' to enable debugging of 'find'
 
-FindReplaceForm::FindReplaceForm(QWidget *parent) : QWidget(parent), ui(new Ui::FindReplaceForm), textEdit(0)
+FindReplaceForm::FindReplaceForm(QWidget *parent) : QWidget(parent), ui(new Ui::FindReplaceForm), textEdit(nullptr)
 {
     ui->setupUi(this);
+
+    ui->findButton->setAutoDefault(false);
+    ui->replaceButton->setAutoDefault(false);
+    ui->replaceAllButton->setAutoDefault(false);
 
     ui->errorLabel->setText("");
 
@@ -34,10 +38,12 @@ FindReplaceForm::FindReplaceForm(QWidget *parent) : QWidget(parent), ui(new Ui::
     connect(ui->regexCheckBox, SIGNAL(toggled(bool)), this, SLOT(regexpSelected(bool)));
 
     connect(ui->findButton, SIGNAL(clicked()), this, SLOT(find()));
-    connect(ui->closeButton, SIGNAL(clicked()), parent, SLOT(close()));
 
     connect(ui->replaceButton, SIGNAL(clicked()), this, SLOT(replace()));
     connect(ui->replaceAllButton, SIGNAL(clicked()), this, SLOT(replaceAll()));
+
+    connect(ui->textToFind, SIGNAL(returnPressed()), ui->findButton, SLOT(click()));
+    connect(ui->textToReplace, SIGNAL(returnPressed()), ui->replaceButton, SLOT(click()));
 }
 
 FindReplaceForm::~FindReplaceForm()
@@ -55,17 +61,15 @@ void FindReplaceForm::hideReplaceWidgets()
 
 void FindReplaceForm::setTextEdit(QTextEdit *textEdit_)
 {
-    if (textEdit)
+    if (textEdit != textEdit_)
     {
-        // Disconnect old control:
-        disconnect(textEdit, 0, ui->replaceButton, 0);
-        disconnect(textEdit, 0, ui->replaceAllButton, 0);
+        disconnect(selectionChangeConnection);
+        ui->replaceButton->setEnabled(false);
+        textEdit = textEdit_;
+        validateRegExp(ui->textToFind->text());
+        if (textEdit)
+            selectionChangeConnection = connect(textEdit, SIGNAL(selectionChanged()), this, SLOT(onSelectionChanged()));
     }
-    textEdit = textEdit_;
-    if (!textEdit)
-        return;
-    connect(textEdit, SIGNAL(copyAvailable(bool)), ui->replaceButton, SLOT(setEnabled(bool)));
-    connect(textEdit, SIGNAL(copyAvailable(bool)), ui->replaceAllButton, SLOT(setEnabled(bool)));
 }
 
 void FindReplaceForm::changeEvent(QEvent *e)
@@ -91,6 +95,8 @@ void FindReplaceForm::showEvent(QShowEvent *event)
 void FindReplaceForm::textToFindChanged()
 {
     ui->findButton->setEnabled(ui->textToFind->text().size() > 0);
+    ui->replaceButton->setEnabled(false);
+    ui->replaceAllButton->setEnabled(ui->textToFind->text().size() > 0);
 }
 
 void FindReplaceForm::regexpSelected(bool sel)
@@ -99,6 +105,11 @@ void FindReplaceForm::regexpSelected(bool sel)
         validateRegExp(ui->textToFind->text());
     else
         validateRegExp("");
+}
+
+void FindReplaceForm::onSelectionChanged()
+{
+    ui->replaceButton->setEnabled(false);
 }
 
 void FindReplaceForm::validateRegExp(const QString &text)
@@ -158,7 +169,10 @@ void FindReplaceForm::find()
 void FindReplaceForm::find(bool next)
 {
     if (!textEdit)
-        return; // TODO: show some warning?
+    {
+        showError("No active editor");
+        return;
+    }
 
     // backward search
     bool back = !next;
@@ -169,13 +183,16 @@ void FindReplaceForm::find(bool next)
 
     // Check the cursor for wrap:
     textCursor = textEdit->textCursor();
-    if (next && textCursor.atEnd())
+    if (!textCursor.hasSelection())
     {
-        textCursor.movePosition(QTextCursor::Start);
-    }
-    else if (back && textCursor.atStart())
-    {
-        textCursor.movePosition(QTextCursor::End);
+        if (next && textCursor.atEnd())
+        {
+            textCursor.movePosition(QTextCursor::Start);
+        }
+        else if (back && textCursor.atStart())
+        {
+            textCursor.movePosition(QTextCursor::End);
+        }
     }
     textEdit->setTextCursor(textCursor);
 
@@ -212,6 +229,7 @@ void FindReplaceForm::find(bool next)
 
     if (result)
     {
+        ui->replaceButton->setEnabled(true);
         showError("");
     }
     else
@@ -238,30 +256,37 @@ void FindReplaceForm::find(bool next)
 void FindReplaceForm::replace()
 {
     if (!textEdit)
+    {
+        showError("No active editor");
         return;
-    if (!textEdit->textCursor().hasSelection())
-    {
-        find();
     }
-    else
-    {
+    if (textEdit->textCursor().hasSelection())
         textEdit->textCursor().insertText(ui->textToReplace->text());
-        find();
-    }
+    find();
 }
 
 void FindReplaceForm::replaceAll()
 {
     if (!textEdit)
-        return;
-    int i = 0;
-    while (textEdit->textCursor().hasSelection())
     {
-        textEdit->textCursor().insertText(ui->textToReplace->text());
-        find();
-        i++;
+        showError("No active editor");
+        return;
     }
-    showMessage(tr("Replaced %1 occurrence(s)", "FindDialog").arg(i));
+
+    if (ui->downRadioButton->isChecked())
+        textEdit->moveCursor(QTextCursor::Start);
+    else
+        textEdit->moveCursor(QTextCursor::End);
+
+    int cnt = 0;
+    find();
+    while (ui->replaceButton->isEnabled())
+    {
+        replace();
+        ++cnt;
+    };
+
+    showMessage(tr("Replaced %1 occurrence(s)", "FindDialog").arg(cnt));
 }
 
 void FindReplaceForm::writeSettings(QSettings &settings, const QString &prefix)
