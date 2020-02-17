@@ -289,6 +289,14 @@ void FindReplaceForm::replaceAll()
     showMessage(tr("Replaced %1 occurrence(s)", "FindDialog").arg(cnt));
 }
 
+void FindReplaceForm::maybeSetTextToFind(const QString &textToFind)
+{
+    if (!textToFind.isEmpty())
+        setTextToFind(textToFind);
+    ui->textToFind->setFocus();
+    ui->textToFind->selectAll();
+}
+
 void FindReplaceForm::writeSettings(QSettings &settings, const QString &prefix)
 {
     settings.beginGroup(prefix);

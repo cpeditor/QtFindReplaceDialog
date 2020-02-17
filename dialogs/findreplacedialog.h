@@ -71,6 +71,11 @@ class FINDREPLACESHARED_EXPORT FindReplaceDialog : public QDialog
      */
     void findPrev();
 
+    /**
+     * Show dialog with text to find selected
+     */
+    void showDialog(const QString &textToFind = QString());
+
   protected:
     void changeEvent(QEvent *e);
 

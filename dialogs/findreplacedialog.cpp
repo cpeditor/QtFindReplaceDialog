@@ -64,3 +64,11 @@ void FindReplaceDialog::findPrev()
 {
     ui->findReplaceForm->findPrev();
 }
+
+void FindReplaceDialog::showDialog(const QString &textToFind)
+{
+    show();
+    raise();
+    activateWindow();
+    ui->findReplaceForm->maybeSetTextToFind(textToFind);
+}

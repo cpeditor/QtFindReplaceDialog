@@ -124,6 +124,11 @@ class FINDREPLACESHARED_EXPORT FindReplaceForm : public QWidget
      */
     void replaceAll();
 
+    /**
+     * Set text to find if not empty and select it
+     */
+    void maybeSetTextToFind(const QString &textToFind = QString());
+
   protected:
     void changeEvent(QEvent *e);
     void showEvent(QShowEvent *event);
