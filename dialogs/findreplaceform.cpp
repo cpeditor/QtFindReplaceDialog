@@ -261,7 +261,13 @@ void FindReplaceForm::replace()
         return;
     }
     if (textEdit->textCursor().hasSelection())
-        textEdit->textCursor().insertText(ui->textToReplace->text());
+    {
+        if (ui->regexCheckBox->isChecked())
+            textEdit->textCursor().insertText(textEdit->textCursor().selectedText().replace(
+                QRegularExpression(ui->textToFind->text()), ui->textToReplace->text()));
+        else
+            textEdit->textCursor().insertText(ui->textToReplace->text());
+    }
     find();
 }
 
