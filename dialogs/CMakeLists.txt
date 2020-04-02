@@ -50,10 +50,3 @@ target_include_directories(QtFindReplaceDialog SYSTEM INTERFACE
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
 	$<INSTALL_INTERFACE:QtFindReplaceDialog/include>  # <prefix>/QtFindReplaceDialog/include
 )
-
-install(TARGETS QtFindReplaceDialog
-			EXPORT QtFindReplaceDialog
-			ARCHIVE DESTINATION "QtFindReplaceDialog/lib"
-			PUBLIC_HEADER DESTINATION "QtFindReplaceDialog/include"
-)
-install(EXPORT QtFindReplaceDialog DESTINATION QtFindReplaceDialog/cmake)
