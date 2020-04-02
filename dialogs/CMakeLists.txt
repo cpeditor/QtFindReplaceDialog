@@ -31,7 +31,7 @@ set(QtFindReplaceDialog_SOURCES
 	${QtFindReplaceDialog_SHARED_HEADERS}
 )
 
-if(WIN32)
+if(MSVC)
 	set(MY_COMPILE_OPTIONS "/W3")
 else()
 	set(MY_COMPILE_OPTIONS "-Wall")
