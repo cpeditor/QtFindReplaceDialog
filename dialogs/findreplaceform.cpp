@@ -158,7 +158,8 @@ void FindReplaceForm::showMessage(const QString &message)
 
 void FindReplaceForm::setTextToFind(const QString &strText)
 {
-    ui->textToFind->setText(strText);
+    ui->textToFind->selectAll();
+    ui->textToFind->insert(strText);
 }
 
 void FindReplaceForm::find()
