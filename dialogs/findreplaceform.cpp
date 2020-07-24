@@ -3,10 +3,10 @@
  * See COPYING file that comes with this distribution
  */
 
+#include <QPlainTextEdit>
 #include <QRegExp>
 #include <QSettings>
 #include <QShowEvent>
-#include <QTextEdit>
 #include <QtGui>
 
 #include "findreplaceform.h"
@@ -59,7 +59,7 @@ void FindReplaceForm::hideReplaceWidgets()
     ui->replaceAllButton->setVisible(false);
 }
 
-void FindReplaceForm::setTextEdit(QTextEdit *textEdit_)
+void FindReplaceForm::setTextEdit(QPlainTextEdit *textEdit_)
 {
     if (textEdit != textEdit_)
     {

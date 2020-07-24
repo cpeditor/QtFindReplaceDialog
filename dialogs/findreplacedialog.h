@@ -15,7 +15,7 @@ namespace Ui
 class FindReplaceDialog;
 }
 
-class QTextEdit;
+class QPlainTextEdit;
 class QSettings;
 
 /**
@@ -34,7 +34,7 @@ class FINDREPLACESHARED_EXPORT FindReplaceDialog : public QDialog
      * Associates the text editor where to perform the search
      * @param textEdit
      */
-    void setTextEdit(QTextEdit *textEdit);
+    void setTextEdit(QPlainTextEdit *textEdit);
 
     /**
      * Writes the state of the form to the passed settings.
