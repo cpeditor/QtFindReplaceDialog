@@ -30,7 +30,7 @@ protected:
     void writeSettings();
     void readSettings();
 
-private slots:
+private Q_SLOTS:
     void about();
 
     void findDialog();

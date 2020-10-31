@@ -80,7 +80,7 @@ class FINDREPLACESHARED_EXPORT FindReplaceForm : public QWidget
      */
     virtual void readSettings(QSettings &settings, const QString &prefix = "FindReplaceDialog");
 
-  public slots:
+  public Q_SLOTS:
     /**
      * Sets the current textToFind (used to set it from specialized current selection, etc)
      */
@@ -139,7 +139,7 @@ class FINDREPLACESHARED_EXPORT FindReplaceForm : public QWidget
     /// shows a message in the dialog
     void showMessage(const QString &message);
 
-  protected slots:
+  protected Q_SLOTS:
     /// when the text edit contents changed
     void textToFindChanged();
 
