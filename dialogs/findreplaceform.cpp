@@ -291,7 +291,7 @@ void FindReplaceForm::replaceAll()
     {
         replace();
         ++cnt;
-    };
+    }
 
     showMessage(tr("Replaced %1 occurrence(s)", "FindDialog").arg(cnt));
 }
