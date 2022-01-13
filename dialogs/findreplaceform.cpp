@@ -287,11 +287,13 @@ void FindReplaceForm::replaceAll()
 
     int cnt = 0;
     find();
+    textEdit->textCursor().beginEditBlock();
     while (ui->replaceButton->isEnabled())
     {
         replace();
         ++cnt;
-    };
+    }
+    textEdit->textCursor().endEditBlock();
 
     showMessage(tr("Replaced %1 occurrence(s)", "FindDialog").arg(cnt));
 }
