@@ -50,7 +50,7 @@ class FINDREPLACESHARED_EXPORT FindReplaceDialog : public QDialog
      */
     virtual void readSettings(QSettings &settings, const QString &prefix = "FindReplaceDialog");
 
-  public slots:
+  public Q_SLOTS:
     /**
      * Sets the current textToFind (used to set it from specialized current selection, etc)
      */
