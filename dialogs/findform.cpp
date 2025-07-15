@@ -4,7 +4,6 @@
  */
 
 #include <QPlainTextEdit>
-#include <QRegExp>
 #include <QtGui>
 
 #include "findform.h"
