@@ -1,11 +1,13 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.5...3.12)
+project(QtFindReplaceDialog LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # ---------------------------------------------------------
 
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -44,7 +46,7 @@ set_target_properties(QtFindReplaceDialog PROPERTIES PUBLIC_HEADER "${QtFindRepl
 target_compile_definitions(QtFindReplaceDialog PUBLIC "-DFINDREPLACESHARED_EXPORT=")
 target_compile_definitions(QtFindReplaceDialog PRIVATE "-DFINDREPLACE_LIBRARY")
 target_compile_options(QtFindReplaceDialog PUBLIC ${MY_COMPILE_OPTIONS})
-target_link_libraries(QtFindReplaceDialog PRIVATE Qt5::Widgets)
+target_link_libraries(QtFindReplaceDialog PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Core)
 
 target_include_directories(QtFindReplaceDialog SYSTEM INTERFACE
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
