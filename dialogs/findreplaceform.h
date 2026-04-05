@@ -16,18 +16,18 @@ namespace Ui
 class FindReplaceForm;
 }
 
-class QTextEdit;
+class QPlainTextEdit;
 class QSettings;
 class QEvent;
 class QShowEvent;
 
 /**
  * The form for the find/replace dialog.  The form presents the typical
- * widgets you find in standard find/replace dialogs, and it acts on a QTextEdit.
+ * widgets you find in standard find/replace dialogs, and it acts on a QPlainTextEdit.
  *
  * \image html Screenshot-FindReplace.png
  *
- * You need to set the QTextEdit explicitly, using the method setTextEdit(QTextEdit *textEdit).
+ * You need to set the QPlainTextEdit explicitly, using the method setTextEdit(QPlainTextEdit *textEdit).
  *
  * For instance
  * \code
@@ -61,7 +61,7 @@ class FINDREPLACESHARED_EXPORT FindReplaceForm : public QWidget
      * Associates the text editor where to perform the search
      * @param textEdit_
      */
-    void setTextEdit(QTextEdit *textEdit_);
+    void setTextEdit(QPlainTextEdit *textEdit_);
 
     /// hides replace widgets from the form
     void hideReplaceWidgets();
@@ -159,7 +159,7 @@ class FINDREPLACESHARED_EXPORT FindReplaceForm : public QWidget
     QTextCursor textCursor;
 
     /// the text editor (possibly) associated with this form
-    QTextEdit *textEdit;
+    QPlainTextEdit *textEdit;
 
     // connection to textedit selection change
     QMetaObject::Connection selectionChangeConnection;
