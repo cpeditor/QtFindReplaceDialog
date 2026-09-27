@@ -152,6 +152,10 @@ class FINDREPLACESHARED_EXPORT FindReplaceForm : public QWidget
     // the selection of the textedit changed
     void onSelectionChanged();
 
+  private Q_SLOTS:
+    /// shows the number of matches of the text to find in the text edit
+    void updateMatchCount();
+
   protected:
     Ui::FindReplaceForm *ui;
 
